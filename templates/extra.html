@@ -1,0 +1,228 @@
+
+
+
+<style>
+    .table1 {
+        margin-left: auto;
+        margin-right: auto;
+       
+    }
+
+    th,
+    td {
+        text-align: center;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #191c24;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    .card-title{
+        font-size: 20px;
+        font-weight: 900px;
+    }
+</style>
+
+<div class="row">
+    <div class=" col-12 grid-margin table1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Registration Details</h4>
+                <input type="text" class="form-control text-light" onkeyup="myFunction()" id="search" name="search" autocomplete="off"
+                    placeholder="Search...">
+                <br>
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <!-- <th>
+                                    <div class="form-check form-check-muted m-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input">
+                                        </label>
+                                    </div>
+                                </th> -->
+                                <th> Sl.No </th>
+                                <th> Name </th>
+                                <th> Phone.No </th>
+                                <th> Email </th>
+                                <th> Batch </th>
+                                <th> Status</th>
+                                <th> Action </th>
+                                <th> Date of Appointment </th>
+                                <th> Employee Id </th>
+                                <th> Payment </th>
+                                <th> Update </th>
+                               
+                                
+                                    <th> Delete </th>
+                                    <th>  </th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                           
+                           
+                            {% for j in pay %}   
+                            {% for i in mem %}
+                            {% if i.id == j.user_id %}
+                            
+                             
+                            <tr>
+                             <form method="post" action='' enctype="multipart/form-data">
+                                 <input type="hidden" name="csrfmiddlewaretoken" value="tQXmqoWItSI9efDGShYpIK5LvnrRGE9qXSEw5Xm7483iaLwAmuS5V21jWHq6Euy4">
+                                 <input type="hidden" name="id" value="43">
+                                <td>
+                                    {{i.id}}
+                                </td>
+                                <td style="text-align:left;">
+                                    <img src="{{i.photo.url }}" alt="image" />
+                                    <span class="ps-2">{{i.fullname}}</span>
+                                </td>
+                                <td style="text-align:left;"> {{i.email}} </td>
+                                <td style="text-align:left;"> {{i.mobile}} </td>
+                                <td>
+                                    <select class="badge badge-outline-primary bg-dark text-light" name="dept" required>
+                                        <option style="display: none" value="2">Morning Batch</option>
+                                        <option value="2">Evening Batch</option>
+                                    </select>
+                                </td>
+                                 <td>
+                                    <select class="badge badge-outline-primary bg-dark text-light" name="stat" >
+                                        <option style="display: none" value="">Active</option>
+                                        <option value="resigned">Resigned</option>
+                                    </select>
+                                </td>
+                                <td>
+                            <button
+                              type="submit"
+                              class="btn btn-outline-primary btn-icon-text"
+                            >
+                              <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                            </button>
+                          </td>
+                                <td> {{i.joiningdate}} </td>
+                                <td> {{i.employee_id}}</td>
+                              
+                                <td> 
+                                    <a href="">
+                                        <div class="btn btn-outline-secondary" data-toggle="modal"
+                                            data-target="#myModal"></a>
+                                           Payment
+                                        </div>
+    
+                                    
+                                </td>
+                              
+                                
+                              
+                                <td> <a href="/man_registration_update/43/"> 
+                                    <div class="badge badge-outline-warning">Update</div></a>
+                                  </td>
+                                 
+                                   <td> <a id="alert2"  href="/registrationdelete/43/"> 
+                                    <div class="badge badge-outline-danger">Delete</div></a>
+                                  
+                                </td>
+                                <td> <a href="/pdfof/43/"> 
+                                    <div class="badge badge-outline-success">Download</div></a>
+                                  </td>
+                                </form>
+                            </tr>
+                    
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+{% for j in pay %}
+
+
+<div class="modal fade" id="myModal"> 
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document"> 
+      <div class="modal-content modal-xl" style="background-color: #191c24;"> 
+        <div class="modal-header"> 
+          <h5 class="modal-title text-info">Payment Details</h5> 
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="" 
+            style="font-size: 20px;;background-color: #191c24;border:none;"> 
+            <span aria-hidden="true">&times;</span> 
+          </button> 
+        </div> 
+        <div class="table-responsive mt-3 mb-3 container"> 
+
+          <table class="table   table-bordered "> 
+            <thead style="background-color: black;"> 
+              <tr> 
+                <th scope="col" style="color:#6C7293;">Account No</th> 
+                <th scope="col" style="color:#6C7293;">IFSC code</th> 
+                <th scope="col" style="color:#6C7293;">Branch</th> 
+                <th scope="col" style="color:#6C7293;">Date of Transactiont</th> 
+                <th scope="col" style="color:#6C7293;">Amount</th> 
+              </tr> 
+            </thead> 
+ 
+            <tbody> 
+ 
+              <tr> 
+                <td style="color:white;">{{j.account_no}}</td> 
+                <td style="color:white;">{{j.ifsc}}</td> 
+                <td style="color:white;">{{j.branch}}</td> 
+                <td style="color:white;">{{j.transactiondate}}</td> 
+                <td style="color:white;">{{j.amount}}</td>
+              </tr> 
+            </tbody> 
+          </table> 
+        </div> 
+      </div> 
+    </div> 
+  </div>
+  {% endfor %}
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+        
+            <!-- modal js -->
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- endmodal -->
+
+
